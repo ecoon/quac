@@ -4,7 +4,7 @@
 ## Config
 
 # Say e.g. "make VERBOSE=--verbose" for verbose output.
-VERBOSE :=
+VERBOSE :=--verbose
 
 # Say e.g. "make LIMIT='--limit 1000'" to limit the number of items processed.
 LIMIT :=

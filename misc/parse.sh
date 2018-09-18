@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Wrapper script to run a parsing make job in a particular directory and drop
 # a lock directory, to avoid multiple makes working in the same directory at

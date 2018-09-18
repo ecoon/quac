@@ -52,7 +52,7 @@ def main():
          continue
       fp = io.open('%s/%d' % (args.inputdir, i), 'rb')
       for line in fp:
-         (k, _, v) = line.partition('\t')
+         (k, _, v) = line.partition(b'\t')
          k = k.decode('utf8')
          v = qr.base.decode(v)
          (proj, _, article) = k.partition(' ')

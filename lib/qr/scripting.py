@@ -46,6 +46,7 @@ import subprocess as sp
 
 import time_
 import u
+import qr.base
 l = u.l
 
 # This command returns false if the first command in the previous pipe failed.
@@ -217,7 +218,11 @@ def pythonify(args):
    class_ = args.python
    # Note: args.pyargs might not really be a string representation of a
    # dictionary. See base.Job.__init__() for more on how this hack works.
-   params = repr(u.str_to_dict(args.pyargs))
+   if (type(args.pyargs) is not str):
+      params = qr.base.decode(args.pyargs)
+   else:
+      params = repr(u.str_to_dict(args.pyargs))
+      
    base = "python3 -c \"import %(module)s; j = %(class_)s(%(params)s); " % locals()
    if (args.map is None):
       args.map = base + "j.map_stdinout()\""

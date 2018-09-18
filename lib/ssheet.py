@@ -22,10 +22,13 @@ class Excel(object):
 
       >>> e = Excel(file_=(u.module_dir() + '/../misc/halloween.xls'))
       >>> pprint(e.data)
-      {'halloween': (Date_Vector('2012-10-26', [ 0.  ,  0.  ,  0.05,  0.05,   nan,  1.  ,   nan,  0.  ,  0.  ,  0.  ]),
-                     Date_Vector('2012-10-26', [ True,  True,  True,  True, False,  True, False,  True,  True,  True], dtype=bool)),
+      {'halloween': (Date_Vector('2012-10-26', [ 0.  ,  0.  ,  0.05,  0.05,   nan,  1.  ,   nan,  0.  ,  0.  ,
+                    0.  ]),
+                     Date_Vector('2012-10-26', [ True,  True,  True,  True, False,  True, False,  True,  True,
+                    True], dtype=bool)),
        's@ndy': (Date_Vector('2012-10-26', [ 0. ,  0. ,  nan,  nan,  1. ,  0.2,  0.1,  nan,  0. ,  0. ]),
-                 Date_Vector('2012-10-26', [ True,  True, False, False,  True,  True,  True, False,  True,  True], dtype=bool))}
+                 Date_Vector('2012-10-26', [ True,  True, False, False,  True,  True,  True, False,  True,
+                    True], dtype=bool))}
       >>> pprint(e.properties)
       {'incubation days': 2.0, 'pathogen': 'Halloween'}'''
 

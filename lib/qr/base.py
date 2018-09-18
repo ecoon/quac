@@ -232,7 +232,7 @@ class KV_Pickle_Seq_Input_Job(Job):
 
    def map_inputs(self):
       for l in self.infp:
-         (key, _, value) = l.partition('\t')
+         (key, _, value) = l.partition(b'\t')
          key = key.decode('utf8')
          value = decode(value)  # base64 ignores trailing newline
          yield (key, value)
@@ -247,10 +247,9 @@ class KV_Pickle_Seq_Output_Job(Job):
    def reduce_write(self, item):
       assert (len(item) == 2)
       self.outfp.write(str(item[0]).encode('utf8'))
-      self.outfp.write('\t')
+      self.outfp.write(b'\t')
       self.outfp.write(encode(item[1]))
-      self.outfp.write('\n')
-
+      self.outfp.write(b'\n')
 
 class Test_Job(Job):
    'Job with dummy implementations of all the abstract methods, for testing.'
@@ -280,12 +279,12 @@ class TSV_Internal_Job(Job):
    def map_write(self, key, value):
       self.outfp.write(key)
       for v in value:
-         self.outfp.write('\t')
-         self.outfp.write(v)
-      self.outfp.write('\n')
+         self.outfp.write(b'\t')
+         self.outfp.write(v.encode('utf8'))
+      self.outfp.write(b'\n')
 
    def reduce_inputs(self):
-      for (key, values) in itertools.groupby((l.split('\t') for l in self.infp),
+      for (key, values) in itertools.groupby((l.split(b'\t') for l in self.infp),
                                              key=operator.itemgetter(0)):
          try:
             key = key.decode('utf8')

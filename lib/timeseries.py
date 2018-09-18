@@ -403,10 +403,14 @@ A Pandas-based interface is provided as well:
    >>> dsp.index
    PeriodIndex(['2015-01-01 00:00', '2015-01-01 01:00', '2015-01-01 02:00',
                 '2015-01-01 03:00', '2015-01-01 04:00', '2015-01-01 05:00',
-     ...
+                '2015-01-01 06:00', '2015-01-01 07:00', '2015-01-01 08:00',
+                '2015-01-01 09:00',
+                ...
+                '2015-01-31 14:00', '2015-01-31 15:00', '2015-01-31 16:00',
+                '2015-01-31 17:00', '2015-01-31 18:00', '2015-01-31 19:00',
                 '2015-01-31 20:00', '2015-01-31 21:00', '2015-01-31 22:00',
                 '2015-01-31 23:00'],
-               dtype='int64', length=744, freq='H')
+               dtype='period[H]', length=744, freq='H')
    >>> dsp.fetch('foo+bar')
    2015-01-01 00:00    20
    2015-01-01 01:00    21
@@ -884,7 +888,7 @@ class Dataset_Pandas(Dataset):
             self.ds_mirror = self.dup()
          denom = self.ds_mirror.fetch(denom_name)
          if (denom.index.freq != series.index.freq):
-            denom = denom.resample(series.index.freq, how='sum')
+            denom = denom.resample(series.index.freq).sum()
          self.denoms[denom_key] = denom
       nseries = series / self.denoms[denom_key]
       nseries.name = name_norm_suffix(series.name)
@@ -915,7 +919,7 @@ class Dataset_Pandas(Dataset):
       for (name, series) in super().fetch_many(names, *args, **kwargs):
          series = pd.Series(series, name=name, index=self.index)
          if (resample):
-            series = series.resample(resample, how='sum')
+            series = series.resample(resample).sum()
          if (normalize):
             series = self.normalize(series)
          if (result is None):
@@ -934,7 +938,7 @@ class Dataset_Pandas(Dataset):
       for (name, array) in super().fetch_all(*args, **kwargs):
          series = pd.Series(array, name=name, index=self.index)
          if (resample):
-            series = series.resample(resample, how='sum')
+            series = series.resample(resample).sum()
          if (normalize):
             try:
                series = self.normalize(series)

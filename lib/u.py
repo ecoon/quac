@@ -1066,6 +1066,8 @@ def str_to_dict(text):
       return dict()
    d = dict()
    for kv in text.split():
+      print("kv:", type(kv), kv)
+      
       (k, _, v) = kv.partition(':')
       d[k] = intfloatpass(v)
    return d

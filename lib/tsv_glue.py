@@ -35,7 +35,7 @@ class Reader(object):
          a filename which does not exist, raise an exception.'''
       self.separator = separator
       mode = 'r' + mode
-      self.fp = io.open(file_, mode=mode, buffering=buffering)
+      self.fp = io.open(file_, mode=mode, buffering=buffering, encoding='utf8')
 
    def __iter__(self):
       return self
